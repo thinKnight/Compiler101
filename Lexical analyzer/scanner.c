@@ -9,12 +9,6 @@ int start_p;
 
 int analyse(char *tmp, int start_p, FILE *fp_w)
 {
-	// FILE *fp_w;
-	// fp_w   = fopen("Lex_result.c", "w");
-	//1.delete the comments in a line;
-	// delete_comments(tmp);
-
-	//2.delete the blank
 	while( isspace(tmp[start_p]) )						
 		start_p++;
 
@@ -22,19 +16,15 @@ int analyse(char *tmp, int start_p, FILE *fp_w)
 	{
 		count = 0;
 		char tmp_str[1000] = {};
-		// start_p = 0;
-		// char ch = tmp[0];
+		
 		while( isalpha(tmp[start_p]) )
 		{
-		
-			// printf("%c\n", ch);
 			tmp_str[count] = tmp[start_p]; 
 			count++;
 			start_p++;
 		}
 		start_p--;
-		// printf("%d\n", start_p);
-		// printf("%s\n", tmp_str);
+		
 		if( is_keyword(tmp_str, fp_w) ){
 			;
 		}
@@ -50,12 +40,9 @@ int analyse(char *tmp, int start_p, FILE *fp_w)
 		{
 			count = 0;
 			char tmp_str[1000] = {};
-			// start_p = 0;
 
 			while( isdigit(tmp[start_p]) )
 			{
-		
-				// printf("%c\n", ch);
 				tmp_str[count] = tmp[start_p]; 
 				count++;
 				start_p++;
@@ -70,10 +57,7 @@ int analyse(char *tmp, int start_p, FILE *fp_w)
 			{
 				count = 0;
 				char tmp_str[1000] = {};
-				// start_p = 0;
-				// tmp_str[count] = tmp[start_p]; 
-				// is_symbol(tmp_str);
-				// if( is_special_symbol(tmp[start_p]) )
+				
 				if( !isalpha(tmp[start_p+1]) && !isdigit(tmp[start_p+1]) )
 				{
 					tmp_str[count] = tmp[start_p];
@@ -107,8 +91,7 @@ int analyse(char *tmp, int start_p, FILE *fp_w)
 
 
 int is_keyword(char *tmp, FILE *fp_w){
-	// FILE *fp_w;
-
+	
 	char *keyword[] = {
 		"main",   "void",    "int",    "float",  "char",     "double",   "for", 
 		"if",     "else",    "while",  "do",     "break",    "switch",   "case",
@@ -119,7 +102,6 @@ int is_keyword(char *tmp, FILE *fp_w){
 	{
 		if( strcmp( tmp, keyword[i]) == 0 )
 		{
-			// printf("Yes! No.%d: %s\n", i, tmp);
 			printf("<%d, %s>\n", i+2, tmp);
 			fprintf(fp_w, "<%d, %s>\n", i+2, tmp);
 			return 1;
@@ -129,8 +111,7 @@ int is_keyword(char *tmp, FILE *fp_w){
 }
 
 int is_symbol(char *tmp, FILE *fp_w){
-	// FILE *fp_w;
-
+	
 	char *symbol[] = {
 
 		"+",  "-",  "*",  "/",  "<",  ">",  "=",  "!",  "&",  "|", 
@@ -145,7 +126,6 @@ int is_symbol(char *tmp, FILE *fp_w){
 
 	for (i = 0; i < 45; ++i)
 		if( strcmp( tmp, symbol[i]) == 0 )
-			// printf("Yes! No.%d: %s\n", i, tmp);
 		{
 			printf("<%d, %s>\n", 22 + i, tmp);
 			fprintf(fp_w, "<%d, %s>\n", 22 + i, tmp);
@@ -176,21 +156,18 @@ int delete_comments(char *tmp)
 	{
 		if(tmp[i] == '/' && tmp[i+1] == '/')
 		{
-			
-				tmp[i] = '\0';
-			
+				tmp[i] = '\0';	
 		}
 	}
 }
 
 int main(int argc, char const *argv[])
 {
-	char tmp[100] = "";											//keep the each string
+	char tmp[100] = "";							
 	char str[100] = "";
 	int flag = 0;
-	// int max = 100;
-	// int buffer_len = 0;
-	FILE *fp, *fp_tmp;									//open the source text
+	
+	FILE *fp, *fp_tmp;									
 	fp = fopen("test.c", "r");
 	fp_tmp = fopen("tmp.c", "w");
 	while(fgets(str, 100, fp) != NULL)
@@ -232,7 +209,6 @@ int main(int argc, char const *argv[])
 	while(!feof(fp_new)){
 		if(fgets(tmp, 100, fp_new))
 			if( is_blankline(tmp) == 0)
-				// analyse(tmp, 0, 0);	
 				analyse(tmp, 0, fp_w);
 	}
 

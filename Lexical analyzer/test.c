@@ -1,12 +1,15 @@
-#include <stdio.h> //JIYE is a foolish
-int main()/asdas
+#include <stdio.h> //This is a simple target code
+int main()
 {
-    printf("Hello World!");
+    printf("TEST BEGUN!");
     int a = 0;
-    a++;
+    int b = 1;
     /*
-    chen sen da sha bi
+        You can not see me!
     */
-    a <= b;
-    return 0;//hehe
+    if(a <= b)
+        printf("Yes");
+ 
+    return 0;
+    //That's it!
 }
